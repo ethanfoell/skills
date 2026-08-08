@@ -1,0 +1,5 @@
+interface:
+  display_name: "Workbook Pickup"
+  short_description: "Quick re-orientation for an onboarded workbook"
+policy:
+  allow_implicit_invocation: false

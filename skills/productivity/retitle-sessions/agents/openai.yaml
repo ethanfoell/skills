@@ -1,0 +1,5 @@
+interface:
+  display_name: "Retitle Sessions"
+  short_description: "Batch-improve past session titles"
+policy:
+  allow_implicit_invocation: false

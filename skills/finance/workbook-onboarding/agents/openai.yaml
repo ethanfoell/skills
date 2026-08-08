@@ -1,0 +1,5 @@
+interface:
+  display_name: "Workbook Onboarding"
+  short_description: "Make a workbook understandable on first open"
+policy:
+  allow_implicit_invocation: false

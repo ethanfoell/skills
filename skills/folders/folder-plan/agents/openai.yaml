@@ -1,0 +1,5 @@
+interface:
+  display_name: "Folder Plan"
+  short_description: "Plan folder work with validation checks"
+policy:
+  allow_implicit_invocation: false

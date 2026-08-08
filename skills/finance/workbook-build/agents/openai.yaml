@@ -1,0 +1,5 @@
+interface:
+  display_name: "Workbook Build"
+  short_description: "Execute a workbook plan with discipline"
+policy:
+  allow_implicit_invocation: false

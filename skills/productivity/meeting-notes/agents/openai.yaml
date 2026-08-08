@@ -1,0 +1,3 @@
+interface:
+  display_name: "Meeting Notes"
+  short_description: "Turn a transcript into a meeting debrief"

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Workbook Log"
+  short_description: "Close out a workbook task in the Audit Log"
+policy:
+  allow_implicit_invocation: false

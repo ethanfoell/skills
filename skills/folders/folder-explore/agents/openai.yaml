@@ -1,0 +1,5 @@
+interface:
+  display_name: "Folder Explore"
+  short_description: "Orient to a folder at session start"
+policy:
+  allow_implicit_invocation: false

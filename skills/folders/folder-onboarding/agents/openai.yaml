@@ -1,0 +1,5 @@
+interface:
+  display_name: "Folder Onboarding"
+  short_description: "Make a folder understandable on first open"
+policy:
+  allow_implicit_invocation: false

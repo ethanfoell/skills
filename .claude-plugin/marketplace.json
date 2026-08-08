@@ -1,0 +1,23 @@
+{
+  "name": "ethanfoell",
+  "owner": {
+    "name": "Ethan Foell"
+  },
+  "description": "Ethan Foell's skills — engineering discipline for a financial analyst's work, as an installable Claude Code plugin.",
+  "plugins": [
+    {
+      "name": "ethanfoell-skills",
+      "source": "./",
+      "description": "Structured loops carry Excel workbooks and file folders from first look to finished, audited change; a planning pipeline grills rough ideas into agent-ready work; and a code-craft arm builds the small finance tools alongside.",
+      "category": "finance",
+      "keywords": [
+        "finance",
+        "excel",
+        "workbooks",
+        "folders",
+        "planning",
+        "skills"
+      ]
+    }
+  ]
+}

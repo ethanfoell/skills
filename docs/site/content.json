@@ -1,0 +1,728 @@
+{
+  "meta": {
+    "title": "skills-ef",
+    "tagline": "A simple, repeatable way of working with Claude — for finance, files, code, and the writing around them.",
+    "intro_lead": "Each skill does one job well, and they fit together into a loop you can learn once and reuse everywhere."
+  },
+  "sections": [
+    {
+      "id": "overview",
+      "kind": "hero",
+      "nav": "Overview",
+      "title": "Overview",
+      "kicker": "A simple, repeatable way of working with Claude",
+      "sub": "For finance, files, code, and the writing around them. You don't need to be technical — every skill has a plain-language card with an everyday example, and the search box above jumps to anything by name.",
+      "note": "Two tracks share the same four steps — Folders and Workbook — and both run end to end; bigger work has its own flow further down the page."
+    },
+    {
+      "id": "standalone",
+      "kind": "cards",
+      "title": "Everyday tools — reach for them anytime",
+      "blurb": "Not steps in any flow — self-contained tools you use on their own whenever they help: session summaries, titles, polished messages, plus the pieces for setting up and maintaining the system itself.",
+      "group": "standalone",
+      "nav": "Everyday tools"
+    },
+    {
+      "id": "helpers",
+      "kind": "cards",
+      "title": "Helpers Claude weaves in",
+      "blurb": "Claude weaves these into the loop and the bigger-work flow further down the page — and you can reach for any of them yourself, at any stage. They're never stops you ride through.",
+      "group": "helpers"
+    },
+    {
+      "id": "loop",
+      "kind": "loop",
+      "title": "The workflow loop",
+      "blurb": "Most work follows the same four-step shape: get your bearings, make a plan, do the work carefully, then close it out. Learn this once and it applies whether you're working in a folder of files or an Excel workbook. Every branch is a skill — click one to open its card; each track's full story is drawn in its own section below.",
+      "trackMeta": {
+        "folders": {
+          "label": "Folders",
+          "prefix": "F",
+          "bucket": "folders"
+        },
+        "finance": {
+          "label": "Workbook",
+          "prefix": "W",
+          "bucket": "finance"
+        }
+      },
+      "stages": [
+        {
+          "key": "explore",
+          "title": "1 · Explore",
+          "blurb": "Get your bearings — what's here, what's in progress, what to do next.",
+          "folders": [
+            "folder-explore",
+            "folder-pickup",
+            "folder-onboarding"
+          ],
+          "finance": [
+            "workbook-explore",
+            "workbook-onboarding",
+            "workbook-pickup"
+          ]
+        },
+        {
+          "key": "plan",
+          "title": "2 · Plan",
+          "blurb": "Decide the approach before touching anything — and name the checks that prove it worked.",
+          "folders": [
+            "folder-plan"
+          ],
+          "finance": [
+            "workbook-plan"
+          ]
+        },
+        {
+          "key": "build",
+          "title": "3 · Build",
+          "blurb": "Do the work one step at a time, verifying as you go and confirming before anything risky.",
+          "folders": [
+            "folder-build"
+          ],
+          "finance": [
+            "workbook-build"
+          ]
+        },
+        {
+          "key": "log",
+          "title": "4 · Log",
+          "blurb": "Record what changed as durable history and update the status.",
+          "folders": [
+            "folder-log"
+          ],
+          "finance": [
+            "workbook-log"
+          ]
+        }
+      ],
+      "nav": "The loop"
+    },
+    {
+      "id": "folders-loop",
+      "kind": "loopdetail",
+      "nav": "Folders loop",
+      "title": "The Folders loop, up close",
+      "blurb": "The tree above teaches the shared four-step shape; this is how a folder task actually rides it. The extra machinery is what carries between sessions: the in-flight signal build opens and log completes, the three signs of unfinished work explore checks when you return, and the door at plan for work too big for one session. Click any stop to open its card.",
+      "group": "folders-loop",
+      "bucket": "folders",
+      "line": [
+        {
+          "skill": "folder-explore",
+          "label": "get your bearings"
+        },
+        {
+          "skill": "folder-plan",
+          "label": "decide the approach"
+        },
+        {
+          "skill": "folder-build",
+          "label": "do the work"
+        },
+        {
+          "skill": "folder-log",
+          "label": "record & close out"
+        }
+      ],
+      "returnLabel": "next session starts at explore ↻",
+      "spur": {
+        "at": "folder-explore",
+        "label": "orientation",
+        "steps": [
+          {
+            "skill": "folder-pickup",
+            "label": "back in a familiar folder"
+          },
+          {
+            "skill": "folder-onboarding",
+            "label": "first time in this folder"
+          }
+        ]
+      },
+      "stubArc": {
+        "from": "folder-build",
+        "to": "folder-log",
+        "label": "LOG.md stub",
+        "detail": "build opens it · log completes it"
+      },
+      "fan": {
+        "into": "folder-explore",
+        "title": "Resume — what explore checks first",
+        "signals": [
+          "dirty Git tree",
+          "open LOG.md stub",
+          "parked handoff"
+        ]
+      },
+      "peer": {
+        "skill": "handoff",
+        "label": "borrowed from Helpers",
+        "signal": "parked handoff"
+      },
+      "chip": {
+        "at": "folder-log",
+        "label": "settled a structural decision? · → docs/adr/ (offered, gated)"
+      },
+      "door": {
+        "at": "folder-plan",
+        "label": "spans sessions? · → the bigger-work flow",
+        "anchor": "metamap"
+      },
+      "caps": [
+        "The whole loop speaks the folder's own vocabulary: when a CONTEXT.md glossary exists, plan and build use its canonical terms, and log records any term the work sharpened — a folder only earns a glossary when it has words worth pinning.",
+        "Big reorganizations get sliced: plan orders the work as thin end-to-end units — move the files, rewire what points at them, check it worked — and build closes each slice before opening the next, so a wrong turn surfaces after one slice, not after all of them.",
+        "History is chosen once, at onboarding: Git by default, a LOG.md file for a named reason. The loop adapts — on Git the dirty working tree is the in-flight signal and the record is a commit; on a file-based folder, the stub drawn above is the signal and the completed entry is the record.",
+        "The docs/adr/ deposit drawn at log isn't log's alone: folder-onboarding makes the same offer when a first visit surfaces a settled structural decision — both gated the same way, and the default is no offer."
+      ],
+      "cardsLabel": "The skills on this loop"
+    },
+    {
+      "id": "workbook-loop",
+      "kind": "loopdetail",
+      "nav": "Workbook loop",
+      "title": "The Workbook loop, up close",
+      "blurb": "The tree above teaches the shared four-step shape; this is how an Excel workbook task actually rides it. Here the between-sessions machinery lives inside the workbook itself: the in-flight stub plan writes to the Audit Log and log completes at close, the Handoff sheet that carries a paused task to the next session, and the two audits waiting beside the line for when the numbers deserve a harder look. Click any stop to open its card.",
+      "group": "workbook-loop",
+      "alsoHomes": "finance",
+      "bucket": "finance",
+      "line": [
+        {
+          "skill": "workbook-explore",
+          "label": "get your bearings"
+        },
+        {
+          "skill": "workbook-plan",
+          "label": "decide approach & tie-outs"
+        },
+        {
+          "skill": "workbook-build",
+          "label": "do the work"
+        },
+        {
+          "skill": "workbook-log",
+          "label": "record & close out"
+        }
+      ],
+      "returnLabel": "next session starts at explore ↻",
+      "spur": {
+        "at": "workbook-explore",
+        "label": "orientation",
+        "steps": [
+          {
+            "skill": "workbook-pickup",
+            "label": "back in a familiar workbook"
+          },
+          {
+            "skill": "workbook-onboarding",
+            "label": "first time in this workbook"
+          }
+        ]
+      },
+      "stubArc": {
+        "from": "workbook-plan",
+        "to": "workbook-log",
+        "label": "In-progress stub",
+        "detail": "plan writes it to the Audit Log · log completes it in place"
+      },
+      "triangle": {
+        "sheet": "Handoff sheet",
+        "writes": "writes it",
+        "peer": {
+          "skill": "workbook-handoff",
+          "label": "pause mid-task"
+        },
+        "detect": {
+          "at": "workbook-explore",
+          "label": "explore detects it"
+        },
+        "clear": {
+          "at": "workbook-log",
+          "label": "log clears it at close"
+        }
+      },
+      "siding": {
+        "at": "workbook-explore",
+        "title": "Audit escalation — in order",
+        "note": "escalation targets, not stops on the line",
+        "steps": [
+          {
+            "skill": "formula-audit",
+            "label": "mechanical errors first"
+          },
+          {
+            "skill": "logic-audit",
+            "label": "then the business logic"
+          }
+        ]
+      },
+      "shelf": {
+        "title": "Composed in when needed — reference know-how & the fresh-eyes review",
+        "note": "plan names the reference skills the task calls for and build inherits them — background know-how Claude draws on while it works; workbook-review is different: you run it yourself, in a fresh chat, when a build's close offers it. None of these are stops you ride through.",
+        "skills": [
+          {
+            "skill": "excel-finance-workbooks",
+            "label": "resilient workbook architecture"
+          },
+          {
+            "skill": "velixo-formulas",
+            "label": "live Acumatica data, kept fast"
+          },
+          {
+            "skill": "workbook-review",
+            "label": "fresh-eyes pass on a build's changes"
+          }
+        ]
+      },
+      "caps": [
+        "The arcs above ride two of the workbook's four AI-scaffolding sheets — the Audit Log the stub lives on, and the Handoff sheet the triangle carries between sessions. The other two work every phase without an arc of their own: the Instructions sheet is the workbook's human manual and vocabulary, and the Agent sheet holds the standing guidance, active risks, and open decisions a session reads before acting.",
+        "Explore's Full orientation is the deep read for when you'll do real work — and it ends by offering /grill-with-files, which stress-tests the plan against the workbook's actual contents instead of your memory of them.",
+        "Close-out is more than the log entry: workbook-log refreshes the Workbook Snapshot only when the task materially changed what it reports, and proposes Agent-sheet updates only when the work surfaced standing guidance — \"nothing to propose\" is the common, correct outcome."
+      ],
+      "cardsLabel": "The skills on this loop",
+      "alsoCardsLabel": "The toolkit drawn beside it — audits, review, handoff & reference know-how"
+    },
+    {
+      "id": "engineering",
+      "kind": "cards",
+      "title": "Building small apps & tools — the code side",
+      "blurb": "Sometimes the work is software itself — a small app or tool to build, a bug to hunt down, a codebase to tidy up. These skills bring the same careful, plan-first way of working to code: some you run yourself, and the rest Claude reaches for automatically.",
+      "group": "engineering",
+      "nav": "Code"
+    },
+    {
+      "id": "metamap",
+      "kind": "metamap",
+      "title": "Bigger work — from idea to shipped",
+      "blurb": "Bigger work follows one shape: shape the idea, decide whether it's a multi-session build, then build it — implement builds code; the Folders and Workbook loops build what lives in a folder or a workbook. Step one is a choice: grill-with-docs shapes an idea that fits one session's planning; when it's too big and foggy for that, wayfinder maps it instead, and its lane skips the junction and merges back at to-spec — a wayfinder effort is multi-session by definition. ask-ef is the guide that points you to the right step in this flow; the shelf underneath holds the helpers Claude weaves in along the way. Click any skill to open its card.",
+      "flow": {
+        "title": "The flow at a glance",
+        "steps": [
+          {
+            "label": "shape",
+            "skills": [
+              "grill-with-docs",
+              "wayfinder"
+            ],
+            "detail": "grill-with-docs — or wayfinder when the idea can't fit one session"
+          },
+          {
+            "label": "spec",
+            "skills": [
+              "to-spec"
+            ],
+            "detail": "to-spec"
+          },
+          {
+            "label": "tickets",
+            "skills": [
+              "to-tickets"
+            ],
+            "detail": "to-tickets"
+          },
+          {
+            "label": "build",
+            "skills": [
+              "implement"
+            ],
+            "detail": "implement for code; the Folders or Workbook loop otherwise — per ticket, fresh session"
+          },
+          {
+            "label": "review",
+            "skills": [
+              "code-review"
+            ],
+            "detail": "code-review closes each build"
+          }
+        ],
+        "caption": "Fits one session? Skip 2–3 and build inline."
+      },
+      "router": "ask-ef",
+      "routerNote": "the guide that points you to the right step",
+      "feeders": [
+        {
+          "skill": "triage",
+          "label": "sorts incoming requests"
+        },
+        {
+          "skill": "setup-skills-ef",
+          "label": "run once per project"
+        }
+      ],
+      "trunk": {
+        "key": "grill",
+        "skill": "grill-with-docs",
+        "label": "Shape the idea"
+      },
+      "altOpener": {
+        "skill": "wayfinder",
+        "label": "can't fit one session"
+      },
+      "junction": {
+        "key": "branch",
+        "label": "Multi-session build?"
+      },
+      "doors": {
+        "yes": "Yes · spans sessions",
+        "no": "No · build inline"
+      },
+      "spur": {
+        "steps": [
+          {
+            "skill": "to-spec",
+            "label": "write the spec"
+          },
+          {
+            "skill": "to-tickets",
+            "label": "cut the tickets"
+          }
+        ],
+        "note": "Behind the Yes door, the build-arm runs once per ticket, in fresh context — implement for code, the loop for a folder or workbook; each ticket names the tickets that must finish before it, so any ticket whose blockers are done can be picked up; handoff carries what matters from one ticket session to the next."
+      },
+      "build": {
+        "key": "build",
+        "label": "Build",
+        "bridge": {
+          "skill": "handoff",
+          "label": "between sessions"
+        }
+      },
+      "arm": {
+        "skill": "implement",
+        "name": "Code",
+        "label": "the code arm",
+        "note": "implement is one skill, not a four-phase loop — it runs the whole code build: tests first at the agreed spots, checks along the way, a review at the end. The code-bench tools on the shelf below compose in."
+      },
+      "loops": [
+        {
+          "name": "Folders",
+          "bucket": "folders",
+          "anchor": "folders-loop"
+        },
+        {
+          "name": "Workbook",
+          "bucket": "finance",
+          "anchor": "workbook-loop"
+        }
+      ],
+      "descendNote": "pick the arm by what you're building — code, a folder, or a workbook",
+      "shelf": {
+        "groups": [
+          "helpers",
+          "engineering"
+        ],
+        "note": "Claude weaves the helpers into the steps above (and you can reach for them any time) — they're never stops you ride through. The code bench backs the code arm: implement composes those tools in as it builds."
+      },
+      "offTreeGroups": [
+        "standalone"
+      ],
+      "nav": "Bigger work",
+      "group": "pipeline",
+      "cardsLabel": "The skills on this flow"
+    },
+    {
+      "id": "maintainer",
+      "kind": "aside",
+      "title": "For maintainers — how this was built",
+      "body": [
+        "This page is generated: a small script reads the live list of shipping skills and merges it with hand-written teaching copy, then emits one self-contained file — so it can't drift out of date. When new skills land, re-running the script picks them up automatically."
+      ]
+    }
+  ],
+  "skills": {
+    "grill-with-docs": {
+      "group": "pipeline",
+      "gist": "Get grilled while it captures the decisions and definitions as written records along the way.",
+      "example": "Kicking off a new area of work, you make the key calls and they're saved as decision records for the next person.",
+      "whenToReach": "Starting bigger, multi-session work that deserves a paper trail."
+    },
+    "to-spec": {
+      "group": "pipeline",
+      "gist": "Turn a conversation you've already had into a written spec, without being re-interviewed.",
+      "example": "After talking through a new feature, you run it to capture everything you agreed on as one document the build can follow.",
+      "whenToReach": "When a decision is big enough to span multiple sessions and needs a durable spec."
+    },
+    "to-tickets": {
+      "group": "pipeline",
+      "gist": "Break a plan or spec into small tickets, each naming the tickets that must finish before it can start.",
+      "example": "A spec describes a multi-part feature; this cuts it into standalone tickets, each finishable and checkable by itself, so anything whose blockers are done can be picked up next.",
+      "whenToReach": "When a plan is too big to do in one go and you want bite-sized tasks with a clear order."
+    },
+    "wayfinder": {
+      "group": "pipeline",
+      "gist": "Plan an effort too big and foggy for one sitting by keeping a shared map of open questions, answered one at a time.",
+      "example": "A big project's path isn't visible yet; this charts the open decisions as a map on the tracker and works through them one per session until the way is clear.",
+      "whenToReach": "When the work is so large you can't yet see the way to the destination, let alone write the spec."
+    },
+    "triage": {
+      "group": "pipeline",
+      "gist": "Move incoming requests through clear states — sort them, verify they're real, and leave a brief so the next person can act.",
+      "example": "A request comes in; you confirm it holds up, decide what kind it is, and write notes saying exactly what's settled and what's still needed.",
+      "whenToReach": "When you have a queue of requests and need to decide what's ready to work on."
+    },
+    "ask-ef": {
+      "group": "pipeline",
+      "gist": "A guide that points you to the right skill when you're not sure where to start.",
+      "example": "You have something to do but don't know which skill fits — you ask, and it routes you to the right first step.",
+      "whenToReach": "Any time you're unsure which skill or flow to use."
+    },
+    "setup-skills-ef": {
+      "group": "pipeline",
+      "gist": "A one-time setup that tells the skills where your project keeps its tasks, what its labels mean, and where its notes live.",
+      "example": "You add these skills to a new project and run setup once so the other skills know where everything is.",
+      "whenToReach": "Once, before you first use the planning and issue skills in a new project."
+    },
+    "implement": {
+      "group": "engineering",
+      "gist": "Take a finished plan — a spec or a set of issues — and build it: tests first at the agreed spots, checks run along the way, and a review at the end.",
+      "example": "You've sliced a feature into issues; Claude works through them in small test-first steps, running the checks as it goes, then reviews the finished work before committing.",
+      "whenToReach": "When planning is done and it's time to actually build — you have a spec or issues ready to become working, committed code."
+    },
+    "prototype": {
+      "group": "engineering",
+      "mapLabel": "answers a design question with throwaway code",
+      "gist": "Build a throwaway version to answer one design question — a tiny app to poke at when the question is how it should behave, or several different looks of one screen when it's how it should look.",
+      "example": "You can't picture what your app's dashboard should look like, so it builds three genuinely different versions you flip between in the browser — you keep the winner and delete the rest.",
+      "whenToReach": "When a design question is easier to answer by trying it than by debating it — the code is disposable; the answer is what you keep."
+    },
+    "improve-codebase-architecture": {
+      "group": "engineering",
+      "mapLabel": "codebase upkeep that feeds ideas back into the flow",
+      "gist": "Scan a whole codebase for spots where the structure causes friction, then lay out the best fixes — turning many tangled little pieces into fewer solid ones — in a visual report.",
+      "example": "You sense every small change ripples through ten files; Claude explores the code, opens a before-and-after report in your browser, and stress-tests your chosen fix with you before anything changes.",
+      "whenToReach": "When the code fights you on every change and you want structural fixes weighed up, not another quick patch. Bug hunts that keep landing in the same messy corner end up here too."
+    },
+    "tdd": {
+      "group": "engineering",
+      "mapLabel": "test-first building at the agreed spots",
+      "gist": "Build a feature or fix a bug in small proven steps — write one test that says what the code should do, add just enough code to pass it, then repeat.",
+      "example": "You ask for a checkout feature; Claude writes a single failing test for the first behavior, makes it pass, then moves to the next — each step proven before the next begins.",
+      "whenToReach": "Claude reaches for it automatically when you want something built or fixed test-first — and implement weaves it in at agreed points during a larger build."
+    },
+    "code-review": {
+      "group": "engineering",
+      "mapLabel": "checks finished work against the rules and the ask",
+      "gist": "Review a finished chunk of work along two separate axes — does the code follow this project's written standards, and does it actually do what the issue asked? Two independent reviewers report side by side, so a pass on one can't hide a failure on the other.",
+      "example": "You finish a feature branch and ask for a review since main; one reviewer flags a naming rule the project documents, the other spots a requirement from the issue that never got built — each reported on its own.",
+      "whenToReach": "Claude reaches for it automatically when you ask to review a branch, a PR, or the changes since some point — and implement hands off to it when a build wraps up."
+    },
+    "codebase-design": {
+      "group": "engineering",
+      "mapLabel": "shapes code into deep modules",
+      "gist": "Background know-how for shaping code into deep modules — lots of behavior hidden behind a small, simple surface — so each piece is easier to use, change, and test.",
+      "example": "You're adding a payments piece to your tool; Claude draws on this to give it one simple front door and tuck the fiddly logic behind it — sometimes sketching a few rival designs and comparing them.",
+      "whenToReach": "Claude reaches for it automatically whenever code is being designed or restructured — and it supplies the shared vocabulary improve-codebase-architecture leans on."
+    },
+    "diagnosing-bugs": {
+      "group": "engineering",
+      "mapLabel": "a proof-first discipline for hard bugs",
+      "gist": "A discipline for hard bugs: before guessing at causes, build a fast, repeatable check that fails on exactly this bug — then narrow suspects one at a time until the fix proves itself.",
+      "example": "Your app crashes on export, but only sometimes; Claude first makes the failure happen on demand, then tests a short ranked list of suspects until the real cause is caught and locked in with a test.",
+      "whenToReach": "Claude reaches for it automatically when you report something broken, throwing errors, failing, or slow. If the fix reveals a deeper design problem, it hands off to improve-codebase-architecture."
+    },
+    "research": {
+      "group": "engineering",
+      "mapLabel": "reads the primary sources while you keep working",
+      "gist": "Hand a question to a background researcher — it digs through the primary sources (official docs, source code, specs), follows every claim back to where it came from, and leaves a cited write-up in your project while you keep working.",
+      "example": "You need to know what an API actually charges per call before building around it; Claude sends a researcher to the official docs and keeps building with you — the cited notes file arrives a few minutes later.",
+      "whenToReach": "Claude reaches for it automatically when you want a topic researched or reading legwork delegated — the write-up it leaves is something to carry into planning, not a replacement for it."
+    },
+    "resolving-merge-conflicts": {
+      "group": "engineering",
+      "mapLabel": "digs into why each side changed before deciding",
+      "gist": "A disciplined way through a git merge conflict — when two sets of changes collide, it digs into why each change was made before deciding what stays.",
+      "example": "You pull in another branch and git halts on lines edited two different ways; Claude reads each side's history, keeps both intents where it can, then runs the project's checks to prove nothing broke.",
+      "whenToReach": "Claude reaches for it automatically whenever git stops mid-merge (or mid-rebase) on conflicting changes — it works through every conflict rather than backing out."
+    },
+    "folder-explore": {
+      "group": "folders-loop",
+      "gist": "Get your bearings in a folder at the start of a session — it checks the state and offers you the right next step.",
+      "example": "You open a project folder you haven't touched in weeks and need to know what's there and what's unfinished.",
+      "whenToReach": "At the start of any session working in a folder."
+    },
+    "folder-pickup": {
+      "group": "folders-loop",
+      "gist": "A quick catch-up on a folder you've worked in before — the essentials, then it stops.",
+      "example": "You're back in a familiar folder and just want a short 'what changed, anything in progress?' summary.",
+      "whenToReach": "Returning to a folder you've already set up."
+    },
+    "folder-onboarding": {
+      "group": "folders-loop",
+      "gist": "Open a brand-new folder and make it understandable — it writes a plain-English guide plus working notes, and starts tracking history.",
+      "example": "Someone hands you a messy shared drive and says 'make sense of this' — this documents what's there and how it's organized.",
+      "whenToReach": "The first time you set a folder up for ongoing work."
+    },
+    "folder-plan": {
+      "group": "folders-loop",
+      "gist": "Draft a clear plan before you move or change a batch of files — goal, steps, and the checks that prove it worked.",
+      "example": "Before reorganizing a folder and updating links across many files, you lay out the plan so a wrong turn gets caught early.",
+      "whenToReach": "Before any multi-file folder change."
+    },
+    "folder-build": {
+      "group": "folders-loop",
+      "gist": "Carry out a folder plan carefully — one step at a time, checking as it goes and asking before anything risky.",
+      "example": "Your plan is ready; this moves the files, verifies links still work, and confirms with you before deleting anything.",
+      "whenToReach": "When a folder plan is ready to execute."
+    },
+    "folder-log": {
+      "group": "folders-loop",
+      "gist": "Wrap up folder work — record it in the history with a clear note and refresh the folder's status.",
+      "example": "You've reorganized and updated docs; this commits everything in one tidy, well-described checkpoint.",
+      "whenToReach": "When you finish a unit of folder work."
+    },
+    "grill-me": {
+      "group": "helpers",
+      "mapLabel": "the same grilling, from memory — no files needed",
+      "gist": "Start the relentless grilling interview to stress-test a plan or design before you build.",
+      "example": "Before a big reorganization, you have it poke holes in your approach so you fix them now, not later.",
+      "whenToReach": "When you want to pressure-test a plan from memory — no files needed."
+    },
+    "grilling": {
+      "group": "helpers",
+      "mapLabel": "the engine under every grill step",
+      "gist": "Reach clarity on a decision before you start — it works through every angle, one question at a time.",
+      "example": "Designing something with lots of moving parts, you walk each decision to a clear answer before starting.",
+      "whenToReach": "The engine behind the grill skills — reach for it when you want the full decision-tree interview."
+    },
+    "grill-with-files": {
+      "group": "helpers",
+      "mapLabel": "grills your plan against the real files",
+      "gist": "Stress-test a plan against the actual files it touches — it opens them and challenges you with what's really there.",
+      "example": "Before editing a workbook or restructuring a folder, it reads the real contents and catches problems instead of asking you to describe them.",
+      "whenToReach": "When the plan touches files and you want it grounded in what's on disk."
+    },
+    "handoff": {
+      "group": "helpers",
+      "gist": "Write a session summary the next agent can trust — stated facts only (what you confirmed this session, not guesses), pointing at prior docs instead of duplicating them.",
+      "example": "After a long working session, you write a standalone brief of what's settled, what's still a lead, and what comes next.",
+      "whenToReach": "When you need to pause and hand off cleanly, so the next session resumes without re-deriving or inheriting wrong assumptions."
+    },
+    "domain-modeling": {
+      "group": "helpers",
+      "mapLabel": "writes your definitions & decisions down",
+      "gist": "Pin down what your project's words actually mean, and record the big decisions as you make them.",
+      "example": "You realize a term means different things to different people, so you write down the one precise definition everyone will use.",
+      "whenToReach": "When fuzzy terminology or undocumented decisions are causing confusion."
+    },
+    "daily-note": {
+      "group": "standalone",
+      "gist": "Turn a work session into a short, skimmable summary for your manager — the outcomes, not the play-by-play.",
+      "example": "End of day, you capture what you solved in a few lines your manager can read in fifteen seconds.",
+      "whenToReach": "When you want a quick, manager-facing recap of what got done."
+    },
+    "chat-title": {
+      "group": "standalone",
+      "gist": "Give the current chat a short, clear title that's easy to spot in the sidebar list.",
+      "example": "After a working session, you have it name the chat by what it accomplished so you can find it later in a crowded project list.",
+      "whenToReach": "When you want the current chat labeled by its outcome, so it's easy to find later."
+    },
+    "retitle-sessions": {
+      "group": "standalone",
+      "gist": "Batch-fix the titles of past chats so your sidebar tells you at a glance what each old session did.",
+      "example": "Your project list is full of vague or auto-generated titles, so you run it to get a table of better names for the bad ones and apply the ones you like.",
+      "whenToReach": "When your list of past chats has gone stale and you want to retitle the worst offenders in one pass."
+    },
+    "work-coms": {
+      "group": "standalone",
+      "gist": "Polish a rough draft or brain-dump into a clean, professional message in your own voice.",
+      "example": "You paste your rough thoughts for a reply and get back a clear, ready-to-send message matched to the channel.",
+      "whenToReach": "When you need to send a polished email or chat message fast."
+    },
+    "meeting-notes": {
+      "group": "standalone",
+      "gist": "Turn a raw meeting transcript into a clean debrief: what happened, what was decided, and who owes what — never inventing what it can't hear.",
+      "example": "You paste a punctuation-free voice-memo transcript and get back a saved debrief with decisions and action items, unclear spots flagged instead of guessed.",
+      "whenToReach": "When a meeting recording or transcript needs to become notes and action items."
+    },
+    "teach": {
+      "group": "standalone",
+      "gist": "Learn a new topic over several sessions, with lessons and a learning path that remembers your progress.",
+      "example": "You want to get good at a topic, so it sets up a workspace and walks you through it step by step over time.",
+      "whenToReach": "When you want to learn something gradually, not in one sitting."
+    },
+    "writing-great-skills": {
+      "group": "standalone",
+      "mapLabel": "for people who write skills",
+      "gist": "The style guide for writing clear, predictable skills — the rules that keep them short and easy to use.",
+      "example": "You're writing or tidying a skill and want to know how to keep it unambiguous and free of clutter.",
+      "whenToReach": "When you're authoring or editing a skill yourself."
+    },
+    "git-guardrails": {
+      "group": "standalone",
+      "gist": "Set up guardrails that block risky version-control commands before they can run.",
+      "example": "You want to work in a project without worrying that a destructive command slips through.",
+      "whenToReach": "When you want a safety net against dangerous git operations."
+    },
+    "workbook-explore": {
+      "group": "workbook-loop",
+      "gist": "Get oriented in an Excel finance workbook at the start of a session, and find the right next step.",
+      "example": "You open a cash-flow workbook for the first time this week and need to know what's unfinished.",
+      "whenToReach": "At the start of a session in a finance workbook."
+    },
+    "workbook-onboarding": {
+      "group": "workbook-loop",
+      "gist": "Read a new workbook end to end and document how it works, so anyone can use it later.",
+      "example": "You inherit a complex variance workbook and write up how its sheets and numbers flow.",
+      "whenToReach": "The first time you take on a workbook you'll work in repeatedly — for return visits, use workbook-pickup instead."
+    },
+    "workbook-pickup": {
+      "group": "workbook-loop",
+      "gist": "Quick re-orientation for a workbook you've worked in — read the existing notes, give a short summary, flag anything in-flight, then stop (it won't propose extra work).",
+      "example": "You return to a monthly reconciliation and want a short 'what changed' summary.",
+      "whenToReach": "Returning to a workbook you've already onboarded."
+    },
+    "workbook-plan": {
+      "group": "workbook-loop",
+      "gist": "Draft a clear plan before changing a finance workbook — goal, steps, and the tie-out checks that prove the numbers still balance.",
+      "example": "Before reworking a reconciliation's formulas, you lay out the plan and the checks so a mistake gets caught before it ships.",
+      "whenToReach": "Before any non-trivial workbook change."
+    },
+    "workbook-build": {
+      "group": "workbook-loop",
+      "gist": "Carry out a workbook plan carefully — step by step, running the tie-out checks as you go and confirming before anything risky.",
+      "example": "Your plan is ready; this makes the changes and verifies the totals still reconcile before you call it done.",
+      "whenToReach": "When a workbook plan is ready to execute."
+    },
+    "workbook-log": {
+      "group": "workbook-loop",
+      "gist": "Close out a workbook task — write it to the Audit Log sheet as a dated record, and capture any standing guidance worth keeping.",
+      "example": "You've finished a reconciliation change; this records what changed, the checks you ran, and anything the next person should know.",
+      "whenToReach": "When you finish a unit of work in a finance workbook."
+    },
+    "formula-audit": {
+      "group": "finance",
+      "gist": "A fast mechanical check of a workbook's formulas — it hunts for errors, numbers typed into formulas, broken links, and ranges that miss a row, and lists what it finds.",
+      "example": "Before sending a model, you run it to catch a stray error cell, a hardcoded figure buried in a formula, or a total that skips the last line.",
+      "whenToReach": "As a quick check before you send a workbook, or any time you want to sanity-check a sheet's formulas."
+    },
+    "logic-audit": {
+      "group": "finance",
+      "gist": "Decode the business logic hidden in a workbook's formulas — how raw records get sorted into the reported numbers — and check it's complete, doesn't double-count, and ties out.",
+      "example": "You suspect a report quietly misses a category or counts something twice; this maps the rules behind the numbers and flags the gaps or overlaps.",
+      "whenToReach": "When the reasoning behind the numbers lives in formulas you can't easily read. Run formula-audit first to rule out mechanical errors."
+    },
+    "workbook-review": {
+      "group": "finance",
+      "gist": "A fresh look at what a workbook build actually changed — it compares the sheets against the before-image the build left, flags any change the record didn't mention, and points the audits at exactly the cells that moved.",
+      "example": "A build rewrote formulas on your Forecast sheet; in a new chat, this walks the changes cell by cell, catches anything unreported, and hands the audits the exact ranges to check.",
+      "whenToReach": "After a build that changed existing formulas — its close offers this exactly then — and before workbook-log clears the before-image."
+    },
+    "workbook-handoff": {
+      "group": "finance",
+      "gist": "Pause a workbook task cleanly mid-stream — it writes a Handoff note inside the workbook so the next session, or the next person, picks up exactly where you left off.",
+      "example": "You have to stop partway through a reconciliation; this records what's done, what's left, and what to watch, so resuming doesn't start from scratch.",
+      "whenToReach": "When you need to stop mid-task in a finance workbook and hand it off without losing the thread."
+    },
+    "excel-finance-workbooks": {
+      "group": "finance",
+      "gist": "Background know-how for building Excel finance workbooks that stay reliable and easy to check over time.",
+      "example": "While building a budget-vs-actuals model, Claude draws on it to lay out the sheets so they don't turn fragile later.",
+      "whenToReach": "Claude reaches for it automatically whenever you're building, reviewing, or reworking a finance workbook."
+    },
+    "velixo-formulas": {
+      "group": "finance",
+      "gist": "Reference for the Velixo functions that pull live Acumatica data into Excel — and how to keep them fast.",
+      "example": "When a report pulls actuals from Acumatica, Claude uses it to write formulas that refresh in seconds, not minutes.",
+      "whenToReach": "Claude reaches for it automatically when a workbook pulls live data from Acumatica through Velixo."
+    }
+  }
+}

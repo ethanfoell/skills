@@ -1,0 +1,5 @@
+interface:
+  display_name: "Folder Build"
+  short_description: "Execute a folder plan with discipline"
+policy:
+  allow_implicit_invocation: false

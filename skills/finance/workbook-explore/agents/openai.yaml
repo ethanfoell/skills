@@ -1,0 +1,5 @@
+interface:
+  display_name: "Workbook Explore"
+  short_description: "Orient to a workbook at session start"
+policy:
+  allow_implicit_invocation: false

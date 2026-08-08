@@ -1,0 +1,5 @@
+interface:
+  display_name: "Formula Audit"
+  short_description: "Mechanical QA scan of workbook formulas"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Workbook Handoff"
+  short_description: "Write a Handoff sheet to pause a workbook task"
+policy:
+  allow_implicit_invocation: false

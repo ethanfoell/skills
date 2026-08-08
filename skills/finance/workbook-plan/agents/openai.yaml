@@ -1,0 +1,5 @@
+interface:
+  display_name: "Workbook Plan"
+  short_description: "Plan workbook work with tie-out validation"
+policy:
+  allow_implicit_invocation: false

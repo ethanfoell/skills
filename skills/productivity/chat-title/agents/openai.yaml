@@ -1,0 +1,5 @@
+interface:
+  display_name: "Chat Title"
+  short_description: "Propose a scannable title for the chat"
+policy:
+  allow_implicit_invocation: false

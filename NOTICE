@@ -1,0 +1,16 @@
+skills-ef
+Copyright (c) 2026 Ethan Foell
+
+This product is a fork of and derives from:
+
+  mattpocock/skills — https://github.com/mattpocock/skills
+  Copyright (c) 2026 Matt Pocock
+  Licensed under the MIT License.
+
+Matt Pocock's skills framework is the scaffold this repository builds on —
+the grilling, handoff, and teach skills, the to-spec -> to-tickets -> triage
+pipeline, domain modeling, and writing-great-skills. His repository is kept as a
+kept-current local reference in the workspace (../matt-skills-ref/) rather than a live
+remote; improvements are pulled manually and reviewed, never auto-merged.
+
+The full MIT License text (covering both copyright holders) is in LICENSE.

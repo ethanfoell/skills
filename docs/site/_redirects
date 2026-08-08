@@ -1,0 +1,8 @@
+# Cloudflare Pages routing (read only by Cloudflare when it serves this
+# directory; the guide build leaves it alone, and production — the separate
+# skills-ef-guide repo — only ever receives the HTML artifact).
+# The 200 rule asks for an in-place rewrite, but because the target is an
+# .html asset, Cloudflare's pretty-URL normalization answers the bare URL with
+# a 308 to /skills-ef-guide instead (observed live, #280). Browsers follow it
+# invisibly, so the dev-environment bookmark still needs no filename in it.
+/ /skills-ef-guide.html 200

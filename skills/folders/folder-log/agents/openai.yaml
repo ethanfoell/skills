@@ -1,0 +1,5 @@
+interface:
+  display_name: "Folder Log"
+  short_description: "Close out folder work in its history layer"
+policy:
+  allow_implicit_invocation: false
