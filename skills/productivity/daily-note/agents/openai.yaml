@@ -1,3 +1,5 @@
 interface:
   display_name: "Daily Note"
   short_description: "Summarize the session as a daily note"
+policy:
+  allow_implicit_invocation: false

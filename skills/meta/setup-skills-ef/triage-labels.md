@@ -1,6 +1,6 @@
 # Triage Labels
 
-The skills speak in terms of seven canonical triage roles — five state roles and two category roles; `/triage` applies exactly one of each kind to every triaged issue. This file maps those roles to the actual label strings used in this repo's issue tracker.
+The skills speak in terms of seven canonical triage roles: five state roles and two category roles; `/triage` applies exactly one of each kind to every triaged issue. This file maps those roles to the actual label strings used in this repo's issue tracker.
 
 | Canonical role    | Label in our tracker | Meaning                                  |
 | ----------------- | -------------------- | ---------------------------------------- |

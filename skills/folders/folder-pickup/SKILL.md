@@ -19,7 +19,7 @@ For quick context on an **already-onboarded** folder (one with a `README.md` + `
 
 This skill exists to enforce **restraint**, not to analyze. The default failure on landing in a folder is to over-helpfully crawl the tree, read everything, and start proposing cleanup. The discipline: read the two surfaces and the recent history, summarize in the locked template, optionally flag, then stop and wait.
 
-- Don't crawl the tree or read file contents beyond the two surfaces (plus a glance at `CONTEXT.md` if present).
+- Don't crawl the tree or read file contents beyond the two surfaces (plus a glance at `GLOSSARY.md` if present).
 - Don't re-derive structure — trust the README and CLAUDE.md.
 - Don't "while I'm here…" anything (no reorganizing, cleanup, or audits).
 - Don't propose work the user hasn't asked for.
@@ -30,7 +30,7 @@ The user knows what's next and will say it. The job is to be oriented enough to 
 
 - **`README.md`** — **Purpose/Overview** and the dated **Status** only. Glance at the Layout for names; skip how-to-use, conventions, known-issues.
 - **`CLAUDE.md`** — only the time-sensitive parts: any **DO NOT EDIT** policy, and **Active risks / Open decisions** if present. Skip standing conventions and gotchas. (If it's already auto-loaded, consult in place — don't re-read.)
-- **`CONTEXT.md`** *(if present)* — skim the glossary terms so the summary speaks the folder's canonical vocabulary. A bounded glance like the CLAUDE.md read, not a tree crawl; it feeds the existing lines and **adds no line** — the six-line template stays frozen.
+- **`GLOSSARY.md`** *(if present)* — skim the glossary terms so the summary speaks the folder's canonical vocabulary. A bounded glance like the CLAUDE.md read, not a tree crawl; it feeds the existing lines and **adds no line** — the six-line template stays frozen. A legacy `CONTEXT.md` is the same glossary under its old name: skim it the same way, and flag renaming it to `GLOSSARY.md` in the optional Flags.
 - **The history layer** — dispatch on the folder's recorded choice (the standing line in its CLAUDE.md): on Git, `git log` for the last few commits ("last touched") and `git status` for uncommitted changes (the in-flight signal, Step 3); on a file-based folder, the top `LOG.md` entries for last-touched, with an **open stub** at the top (an entry still marked **In progress**) as the in-flight signal. No recorded choice → fall back to README `Status` / mtimes; don't repair, init, or seed. A lock warning is the ungranted file-delete permission, not a dead repo — trust a `git log` that still reports.
 
 If neither surface exists, stop and recommend `/folder-onboarding`. If only one, note the partial scaffolding and proceed.
@@ -92,8 +92,8 @@ When the next prompt arrives, route to the right skill (silently — don't pre-a
 
 ## Quality checklist
 
-- [ ] Read only README (Purpose + Status) + CLAUDE.md (DO NOT EDIT + risks/decisions) + `CONTEXT.md` terms if present + the recorded history layer's recent records (or the Status/mtime fallback) — no tree crawl, no file-content reads
-- [ ] Output is exactly the six-line template (+ optional Flags) — the `CONTEXT.md` glance adds no line
+- [ ] Read only README (Purpose + Status) + CLAUDE.md (DO NOT EDIT + risks/decisions) + `GLOSSARY.md` terms if present + the recorded history layer's recent records (or the Status/mtime fallback) — no tree crawl, no file-content reads
+- [ ] Output is exactly the six-line template (+ optional Flags) — the `GLOSSARY.md` glance adds no line
 - [ ] No preamble, no closing question, no emoji
 - [ ] In-flight state flagged with a pointer to `/folder-explore` — not resumed, committed, or reconciled
 - [ ] Flags section omitted entirely if none ("No flags" is noise)

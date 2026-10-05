@@ -1,16 +1,31 @@
-skills-ef
+Ethan Foell's skills
 Copyright (c) 2026 Ethan Foell
 
 This product is a fork of and derives from:
 
-  mattpocock/skills — https://github.com/mattpocock/skills
+  mattpocock/skills (https://github.com/mattpocock/skills)
   Copyright (c) 2026 Matt Pocock
   Licensed under the MIT License.
 
-Matt Pocock's skills framework is the scaffold this repository builds on —
+Matt Pocock's skills framework is the scaffold this repository builds on:
 the grilling, handoff, and teach skills, the to-spec -> to-tickets -> triage
-pipeline, domain modeling, and writing-great-skills. His repository is kept as a
-kept-current local reference in the workspace (../matt-skills-ref/) rather than a live
-remote; improvements are pulled manually and reviewed, never auto-merged.
+pipeline, domain modeling, and writing-for-agents (his writing-great-skills
+when the fork was cut). Improvements from upstream are reviewed and pulled
+manually.
 
-The full MIT License text (covering both copyright holders) is in LICENSE.
+The unslop skill (skills/productivity/unslop) is adapted from the unslop
+skill in the pstack plugin:
+
+  pstack, in cursor/plugins (https://github.com/cursor/plugins/tree/main/pstack)
+  Copyright (c) 2026 Lauren Tan
+  Licensed under the MIT License.
+
+The pr skill (skills/engineering/pr) adapts its Summary visuals from the
+show-me skill by Dex Horthy, in HumanLayer's skills repository:
+
+  show-me, in humanlayer/skills (https://github.com/humanlayer/skills/tree/main/plugins/show-me)
+  Copyright (c) 2026 HumanLayer
+  Licensed under the MIT License.
+
+The MIT License text in LICENSE is the permission notice for this repository
+and for each work credited above.

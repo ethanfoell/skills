@@ -1,12 +1,12 @@
 ---
 name: workbook-log
-description: Close out a task in an Excel finance workbook — complete the In-progress stub in place (or append a standalone block), refresh the Workbook Snapshot if the task changed it, clear the Handoff sheet and any Baseline sheets at close, flip a Tickets-sheet ticket to Done when the task traces to one, and propose Agent-sheet updates when the work surfaced standing guidance. The workbook loop's close-out phase.
+description: "Close out a task in an Excel finance workbook: complete the In-progress stub in place (or append a standalone block), refresh the Workbook Snapshot if the task changed it, clear the Handoff sheet at close, flip a Tickets-sheet ticket to Done when the task traces to one, and propose Agent-sheet updates when the work surfaced standing guidance. The workbook loop's close-out phase."
 disable-model-invocation: true
 ---
 
 # /workbook-log
 
-The fourth, **close-out** phase of the `/workbook-explore` → `/workbook-plan` → `/workbook-build` → `/workbook-log` loop. Closes a task by writing a structured entry to the **Audit Log** sheet — completing the In-progress stub `/workbook-plan` wrote, or appending a fresh block for a standalone fix — then refreshing the Workbook Snapshot, clearing the Handoff sheet and any Baseline sheets, and proposing Agent-sheet updates where the work earned them.
+The fourth, **close-out** phase of the `/workbook-explore` → `/workbook-plan` → `/workbook-build` → `/workbook-log` loop. Closes a task by writing a structured entry to the **Audit Log** sheet — completing the In-progress stub `/workbook-plan` wrote, or appending a fresh block for a standalone fix — then refreshing the Workbook Snapshot, clearing the Handoff sheet, and proposing Agent-sheet updates where the work earned them.
 
 **Tasks, not sessions, are the unit of record.** Each `/workbook-log` writes one task block; multiple per session is normal.
 
@@ -18,7 +18,7 @@ The fourth, **close-out** phase of the `/workbook-explore` → `/workbook-plan` 
 
 The Audit Log is **history**; the Agent sheet is **the operating manual** synthesized from it. Keep them complementary — a dated event in the Audit Log, the standing rule it implies in the Agent sheet — never duplicated.
 
-Two shared contracts define what this skill writes, both owned by the sheet-layer skill: the block format is the `/workbook-onboarding` skill's `AUDIT-LOG-FORMAT.md`; the sheet identities, Agent sections, Handoff lifecycle, and palette are the `/workbook-onboarding` skill's `SHEET-CONTRACTS.md`. On a multi-session effort workbook two more apply, same owner: the Tickets sheet this skill flips is its `TICKETS-SHEET.md`; the Baseline sheets it clears are its `BASELINE-SHEET.md`.
+Two shared contracts define what this skill writes, both owned by the sheet-layer skill: the block format is the `/workbook-onboarding` skill's `AUDIT-LOG-FORMAT.md`; the sheet identities, Agent sections, Handoff lifecycle, and palette are the Sheet conventions in the `/workbook-onboarding` skill's `SKILL.md`. On a multi-session effort workbook one more applies, same owner: the Tickets sheet this skill flips is its `MULTI-SESSION.md`.
 
 ## When to use
 
@@ -64,7 +64,7 @@ A standalone fix may be just Goal + Done + Sheets touched; a cancelled task may 
 
 **Issue-traced task:** when the task traces to an issue, the block names the issue and checks Done against its **acceptance criteria** — each criterion stated met or not, inside the existing fields (the criteria seeded the plan's Validation/Tie-outs, so this closes against the issue, not only the plan). A task with no issue gets no extra line.
 
-**Ticket on the Tickets sheet:** when the task traces to a ticket on the workbook's **Tickets sheet** (a multi-session effort — the block names its T-id), read the acceptance criteria from that row, and after writing the block **flip the ticket's `Status` to Done and set the `Status date`** — the lifecycle's **Closed** step, per the `/workbook-onboarding` skill's `TICKETS-SHEET.md`. Flip, don't delete: the row is queue state; this block is the narrative.
+**Ticket on the Tickets sheet:** when the task traces to a ticket on the workbook's **Tickets sheet** (a multi-session effort — the block names its T-id), read the acceptance criteria from that row, and after writing the block **flip the ticket's `Status` to Done and set the `Status date`** — the lifecycle's **Closed** step, per the `/workbook-onboarding` skill's `MULTI-SESSION.md`. Flip, don't delete: the row is queue state; this block is the narrative.
 
 **Effort complete — offer the audits, once.** Doubly conditional: the task traces to a Tickets-sheet ticket **and** the flip leaves no ticket on the sheet still Open or In progress. Then the effort's last ticket just closed — many sessions of self-checked work are about to become trusted output — so the close-out report (Step 6) says so: *that was the effort's last ticket; before the workbook goes out or gets trusted, `/formula-audit` then `/logic-audit` are the fresh-eyes pass — they read the cells cold, with none of the build sessions' assumptions.* Offer once, at this close, and **never auto-run** — both audits are user-invoked; naming them is the whole move. Either condition false — a mid-effort close, a ticketless task — no line.
 
@@ -92,7 +92,7 @@ If none apply, **leave the snapshot alone.**
 
 Do **NOT** propose for: one-time events (those live in the block's Done field), trivia (typos, formatting), anything already in the Agent sheet, or human-process docs (those belong in the Instructions sheet). This is the loop's in-place "deepening" — a proposed standing rule, not an architecture scan.
 
-**How to propose** — surface the exact wording in chat under the target section (the five are defined in the `/workbook-onboarding` skill's `SHEET-CONTRACTS.md`), and ask:
+**How to propose** — surface the exact wording in chat under the target section (the five are defined in the Sheet conventions of the `/workbook-onboarding` skill's `SKILL.md`; a workbook with no Agent sheet yet gets one now, built to those conventions with every section placeholdered, before the first accepted line is written), and ask:
 
 > Proposing Agent-sheet update under **Operating conventions**:
 > "Refresh Velixo before GL tie-outs — F9 alone won't refresh Velixo formulas."
@@ -106,19 +106,13 @@ Accept → write it under that section. Edit → use the user's wording. Skip �
 1. **Run the finalization pass** on each sheet this task touched — the formatting `/workbook-build`
    deferred: text-wrap on and content rows top-aligned, row heights autofit with the 20px floor,
    title rows held at 28px, and nothing clipping. Geometry and alignment per the
-   `/workbook-onboarding` skill's `SHEET-CONTRACTS.md`. (The loop's formatting-timing rule:
+   `/workbook-onboarding` skill's `SKILL.md`, Sheet conventions. (The loop's formatting-timing rule:
    `/workbook-build` writes content only; the close-out polishes.)
-2. **Clear any Baseline sheets** — delete every `Baseline — [sheet]` sheet the build created,
-   whatever the closing status, and note "Baseline sheets cleared" in Sheets touched. The close
-   half of the baseline lifecycle (Handoff-mirror: a temporary before-image, never a second
-   history layer), per the `/workbook-onboarding` skill's `BASELINE-SHEET.md`. If a baseline
-   stands at close and `/workbook-review` hasn't run for this task, offer it before clearing —
-   the diff's raw material is never silently destroyed. Offered, never auto-run.
-3. Re-read the rows you wrote — confirm no truncation or formatting issues.
-4. Tell the user briefly: the task title, completion status, and the key items captured — plus
+2. Re-read the rows you wrote — confirm no truncation or formatting issues.
+3. Tell the user briefly: the task title, completion status, and the key items captured — plus
    the effort-complete audits offer when Step 3's doubly-conditional check fired.
-5. If anything was intentionally **not** logged (trivial debugging, undone attempts), say so in one line.
-6. If you wrote to the Agent sheet, confirm what was added.
+4. If anything was intentionally **not** logged (trivial debugging, undone attempts), say so in one line.
+5. If you wrote to the Agent sheet, confirm what was added.
 
 ## What NOT to log
 
@@ -138,7 +132,6 @@ Accept → write it under that section. Edit → use the user's wording. Skip �
 - [ ] Issue-traced task: block names the issue and Done checked against its acceptance criteria (no issue → nothing extra)
 - [ ] Tickets-sheet ticket: `Status` flipped to Done with a `Status date` — flip, don't delete
 - [ ] Effort-complete audits offer made iff the task traced to a Tickets-sheet ticket AND the flip left none open — offered once, never auto-run
-- [ ] Baseline sheets cleared at close — none left behind; `/workbook-review` offered first when one stood unreviewed
 - [ ] Empty fields omitted, not left blank; cancelled tasks carry a Cancel reason
 - [ ] Workbook Snapshot refreshed only if the task materially changed it
 - [ ] Finalization pass run on every sheet the task touched — autofit with floor, alignment, no clipping
@@ -152,6 +145,8 @@ Accept → write it under that section. Edit → use the user's wording. Skip �
 
 **Multiple tasks in one `/workbook-log`:** rare — `/workbook-log` is per-task. Ask whether to write separate blocks (default) or combine; combining loses the per-task granularity the design exists for.
 
-**Task crossed sessions via `/workbook-handoff`:** **clear the Handoff sheet** — delete the entire sheet — when this `/workbook-log` completes the task, and note "Handoff sheet cleared" in Sheets touched (the Handoff lifecycle's close half, per the `/workbook-onboarding` skill's `SHEET-CONTRACTS.md`). The block's date is the close-out date; mention the originating session in the Plan field if it matters.
+**Task crossed sessions via `/workbook-handoff`:** **clear the Handoff sheet** — delete the entire sheet — when this `/workbook-log` completes the task, and note "Handoff sheet cleared" in Sheets touched (the Handoff lifecycle's close half, per the `/workbook-onboarding` skill's `SKILL.md`, Sheet conventions). The block's date is the close-out date; mention the originating session in the Plan field if it matters.
+
+**Stray `Baseline — [sheet]` sheets in the workbook:** leftovers from an earlier version of `/workbook-build`, which captured them as transient before-images. Offer to delete them at close; they were never a second history layer.
 
 **Re-logging or editing a prior task:** modify the block in place rather than appending; add "[Edited YYYY-MM-DD: reason]" in col B of the affected field to preserve the change history.

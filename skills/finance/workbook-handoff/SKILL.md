@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Generate a durable, structured artifact — the **Handoff sheet** — that lets a future session continue the current task with a fresh context window. A **peer** to the `/workbook-explore` → `/workbook-plan` → `/workbook-build` → `/workbook-log` loop, not a phase within it: invoked at any point during an active task when the user wants to pause and pick up later.
 
-`/workbook-handoff` is the **creator** end of the Handoff lifecycle — `/workbook-explore` detects the sheet next session, `/workbook-log` clears it at close. This skill carries [`HANDOFF-FORMAT.md`](HANDOFF-FORMAT.md), the canonical block format it owns; the sheet identities, title rows, Handoff lifecycle, and palette are defined in the `/workbook-onboarding` skill's `SHEET-CONTRACTS.md`.
+`/workbook-handoff` is the **creator** end of the Handoff lifecycle — `/workbook-explore` detects the sheet next session, `/workbook-log` clears it at close. This skill carries [`HANDOFF-FORMAT.md`](HANDOFF-FORMAT.md), the canonical block format it owns; the sheet identities, title rows, Handoff lifecycle, and palette are the Sheet conventions in the `/workbook-onboarding` skill's `SKILL.md`.
 
 ## When to use
 
@@ -25,7 +25,7 @@ Skip it for:
 
 `/workbook-handoff` writes structured task state to the workbook — the plan and the decisions that shaped it, current progress and the specific next step, this task's user-stated preferences, and the non-obvious observations that read as background but are expensive to rediscover. It captures what otherwise lives only in chat and would be lost across the session boundary.
 
-It does **NOT** write the Audit Log. The Handoff sheet is the in-flight record; `/workbook-log` captures the eventual resolution (Complete on resumption, Cancelled on abandonment) and clears the sheet. The full detection and clearing contract lives in the `/workbook-onboarding` skill's `SHEET-CONTRACTS.md`.
+It does **NOT** write the Audit Log. The Handoff sheet is the in-flight record; `/workbook-log` captures the eventual resolution (Complete on resumption, Cancelled on abandonment) and clears the sheet. The full detection and clearing contract lives in the `/workbook-onboarding` skill's `SKILL.md`, Sheet conventions.
 
 ## Step 1: Confirm the handoff scope
 
@@ -55,7 +55,7 @@ Read the chat and extract the six fields (per [`HANDOFF-FORMAT.md`](HANDOFF-FORM
 
 ## Step 4: Write the Handoff sheet
 
-Add a sheet named exactly **`Handoff`** at the last position, with its title banner (alert-orange fill, A1/A2 text, tab color, two-column geometry) per the `/workbook-onboarding` skill's `SHEET-CONTRACTS.md`, then write the handoff block — metadata row, orange rail, the six fields, field-row formatting — per [`HANDOFF-FORMAT.md`](HANDOFF-FORMAT.md). One handoff block per sheet (a single in-flight task).
+Add a sheet named exactly **`Handoff`** at the last position, with its title banner (alert-orange fill, A1/A2 text, tab color, two-column geometry) per the Sheet conventions in the `/workbook-onboarding` skill's `SKILL.md`, then write the handoff block — metadata row, orange rail, the six fields, field-row formatting — per [`HANDOFF-FORMAT.md`](HANDOFF-FORMAT.md). One handoff block per sheet (a single in-flight task).
 
 **Self-format at creation.** The Handoff sheet leaves this pass fully formatted — geometry, autofit with the floor, alignment, tab color, the template-version cell note on its title cell — so a paused task's surface is complete the moment it's written; nothing waits for a later phase.
 

@@ -1,6 +1,6 @@
 ---
 name: workbook-build
-description: Execute a finalized `/workbook-plan` in an Excel finance workbook with discipline — per-step reporting, inline Validation/Tie-outs as affected Steps complete, destructive-op confirmation (with a pre-flight baseline-sheet snapshot when the scan flags destructive work), and a Surfaced list for out-of-scope discoveries. Reads the In-progress stub `/workbook-plan` wrote (never writes it); conditionally composes `/excel-finance-workbooks` and `/velixo-formulas`. Operates in lightweight mode when no plan is in context. The workbook loop's execution phase.
+description: "Execute a finalized `/workbook-plan` in an Excel finance workbook with discipline: per-step reporting, inline Validation/Tie-outs as affected Steps complete, destructive-op confirmation, and a Surfaced list for out-of-scope discoveries. Reads the In-progress stub `/workbook-plan` wrote (never writes it); conditionally composes `/excel-finance-workbooks` and `/velixo-formulas`. Operates in lightweight mode when no plan is in context. The workbook loop's execution phase."
 disable-model-invocation: true
 ---
 
@@ -44,11 +44,11 @@ Three fast checks before executing:
 Quickly scan the plan before executing:
 
 - **Map Validation/Tie-outs to Steps.** Which Steps does each check depend on? Run each as the last Step it depends on completes — not at the end. If `/workbook-plan` ordered the work as **vertical slices**, the slice boundaries are those checkpoints: **close each slice with its tie-out before opening the next**, so a wrong formula halts the build before it replicates into the next unit.
-- **Flag destructive operations — and snapshot a baseline when any are flagged.** Identify any Step meeting the destructive criteria (see **Destructive operations**). These pause for confirmation when reached, regardless of plan content. If the scan flagged one or more, capture a **baseline** before executing: for each sheet the plan is about to touch, a `Baseline — [sheet]` formula-text before-image, per the `/workbook-onboarding` skill's `BASELINE-SHEET.md` contract. The scan's verdict is the whole trigger — destructive means pre-existing content will be modified or lost, so there is a "before" worth capturing; an additive build creates nothing, ever. `/workbook-log` clears the baseline at close.
+- **Flag destructive operations.** Identify any Step meeting the destructive criteria (see **Destructive operations**). These pause for confirmation when reached, regardless of plan content.
 - **Note handback steps.** Steps the plan marked **Handback** (a Velixo refresh above all) are the user's to perform when reached — see Step 3.
 - **Initialize the Surfaced list.** Start empty; out-of-scope discoveries queue here; `/workbook-log` reads it at close.
 
-One- or two-line preface: "Plan reviewed: N steps, M validations, X destructive ops will need confirmation — baseline captured for [sheets]. Starting execution." (No destructive ops → no baseline, and the preface drops the clause.)
+One- or two-line preface: "Plan reviewed: N steps, M validations, X destructive ops will need confirmation. Starting execution." (No destructive ops: drop that clause rather than saying "0".)
 
 ## Step 3: Execute with checkpoints
 
@@ -125,8 +125,6 @@ Ready for /workbook-log?
 
 The `Status` line reads `Complete` when every Step landed and every Validation passed (or failed-and-resolved), `Partial` when work stopped with a check deferred or Steps unfinished. (`Cancelled` is `/workbook-log`'s vocabulary, not `/workbook-build`'s.) This mirrors the fields `/workbook-log` completes in the stub — including the completion state it reads directly — so close-out is mechanical.
 
-**When a baseline exists** — the pre-flight scan flagged destructive ops and captured one — the closing line becomes **"Ready for `/workbook-review` → `/workbook-log`?"** instead: the same trigger that created the baseline arms the offer. `/workbook-review` is the fresh-eyes, changes-scoped review of what this build changed, best run in a fresh session while the baseline still stands; it is offered here, **never auto-run**. No baseline, no extra line.
-
 ## Destructive operations
 
 ALWAYS pause for explicit user confirmation before a destructive operation, whether or not the plan named it. Plan-time approval is provisional; execution-time confirmation is the gate.
@@ -167,7 +165,7 @@ If the user chooses lightweight mode:
 - Per-step reporting still applies — one line per material change.
 - Validation discipline still applies — state what you'd verify, then verify it (visual checks count for non-quantitative tasks).
 - Out-of-scope discoveries still go to the Surfaced list.
-- Destructive operations still require explicit confirmation. Lightweight mode never auto-engages a baseline sheet — the per-op confirmation already shows before/after at one-cell grain.
+- Destructive operations still require explicit confirmation.
 - Loop-backs are simpler: hit something unanticipated → ask, rather than loop to `/workbook-plan`.
 
 `/workbook-log` captures this as "direct execution, no formal plan" in the Plan field — the auto-omit rule doesn't apply here; the note is the signal that lightweight mode was used. Lightweight mode is for genuinely quick tasks. If you find yourself doing three or more material changes with cross-cutting validation, surface it: "This is growing past lightweight scope — pause and run `/workbook-plan`?"
@@ -185,13 +183,11 @@ Both are visible in chat and captured in `/workbook-log` Deviations. More than t
 - [ ] Every Validation/Tie-out ran (passed, failed-and-resolved, or noted as failed-deferred)
 - [ ] On a sliced plan, each slice was closed by its tie-out before the next opened; a loop-back revised only the remaining slices
 - [ ] Every destructive op was explicitly confirmed before execution
-- [ ] A baseline was captured iff the pre-flight scan flagged destructive ops — every touched sheet snapshotted before execution; none for an additive build
 - [ ] Every **Handback** step paused for the user; no tie-out ran on pre-handback data
 - [ ] Out-of-scope discoveries went to Surfaced, not silently done
 - [ ] Deviations (adaptations, loop-backs) noted clearly enough for `/workbook-log` to capture
 - [ ] Sheets touched list is complete
 - [ ] Final summary leads with `Status: [Complete | Partial]` and matches the structure `/workbook-log` reads against
-- [ ] Closing line named `/workbook-review` iff a baseline was captured — offered, never auto-run
 
 ## Edge cases
 
