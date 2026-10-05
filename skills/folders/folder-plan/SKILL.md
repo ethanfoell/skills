@@ -1,6 +1,6 @@
 ---
 name: folder-plan
-description: Draft a structured, chat-first plan before real, multi-file work in a folder — a six-section plan (Goal, Approach, Steps, Validation, Open Questions, Out of Scope) to review before `/folder-build` runs. Validation is the keystone: the folder checks that prove the work sound (links resolve, a build passes, cross-references intact, counts tie). Ends by offering to park the plan (`/handoff`) or run it (`/folder-build`); routes unsettled shaping decisions to `/grill-with-files`, not an inline interview. The folder loop's planning phase.
+description: "Draft a structured, chat-first plan before real, multi-file work in a folder — a six-section plan (Goal, Approach, Steps, Validation, Open Questions, Out of Scope) to review before `/folder-build` runs. Validation is the keystone: the folder checks that prove the work sound (links resolve, a build passes, cross-references intact, counts tie). Ends by offering to park the plan (`/handoff`) or run it (`/folder-build`); routes unsettled shaping decisions to `/grill-with-files`, not an inline interview. The folder loop's planning phase."
 disable-model-invocation: true
 ---
 
@@ -44,7 +44,7 @@ Three fast checks — signals to surface, not gates:
 
 Draft in chat. Sections can collapse to one line for light work, but **always include every header** — the structure is the contract `/folder-build` reads against.
 
-If the folder has a `CONTEXT.md`, use its **canonical terms** in the plan — not the `_Avoid_` synonyms — so the plan, the build, and the commit speak one vocabulary. If the work coins or sharpens a term, don't author the glossary inline: **note it for `/folder-log`** to record via `/domain-modeling`.
+If the folder has a `GLOSSARY.md`, use its **canonical terms** in the plan — not the `_Avoid_` synonyms — so the plan, the build, and the commit speak one vocabulary. If the work coins or sharpens a term, don't author the glossary inline: **note it for `/folder-log`** to record via `/domain-modeling`.
 
 **1. Goal** — one or two lines: what "done" looks like, concrete enough to recognize completion.
 - Good: "The twelve loose June exports live under `2026/06/`; the README Layout lists them; `consolidate_exports.py` still runs clean."
@@ -128,7 +128,7 @@ Bounded, visible in chat, and captured in the eventual `/folder-log` Deviations.
 - [ ] Ended by offering to park (`/handoff`) or run (`/folder-build`)
 - [ ] Unsettled shaping decisions routed to `/grill-with-files`, not interviewed inline
 - [ ] A multi-session feature is routed up the stairs (`/grill-with-docs → /to-spec → /to-tickets`), not planned here as one unit
-- [ ] Uses the folder's `CONTEXT.md` canonical terms (not `_Avoid_` synonyms); any coined term queued for `/folder-log`, not authored inline
+- [ ] Uses the folder's `GLOSSARY.md` canonical terms (not `_Avoid_` synonyms); any coined term queued for `/folder-log`, not authored inline
 
 ## Edge cases
 

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Wrap-up"
+  short_description: "Close out the session with a summary and proposals"
+policy:
+  allow_implicit_invocation: false

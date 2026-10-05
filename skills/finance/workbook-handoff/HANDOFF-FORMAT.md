@@ -4,8 +4,8 @@ Canonical definition of the block *inside* the Handoff sheet — the metadata ro
 and field formatting. **Canonical home: this file in `workbook-handoff/`** — the only skill that
 writes a handoff block. `/workbook-explore` reads the Handoff sheet this produces; `/workbook-log`
 clears it at task close. The Handoff sheet's name, title banner, position, tab color, and
-lifecycle live in the `sheet-contracts` contract — the `/workbook-onboarding` skill's
-`SHEET-CONTRACTS.md`; this file defines what goes inside it. This contract is **self-contained** —
+lifecycle live in the Sheet conventions of the `/workbook-onboarding` skill's
+`SKILL.md`; this file defines what goes inside it. This contract is **self-contained** —
 it does not depend on any other contract being present alongside it.
 
 **Contract version:** handoff-format v2
@@ -13,10 +13,10 @@ it does not depend on any other contract being present alongside it.
 ## Block metadata row
 
 No fill — the alert fill belongs to the sheet's title banner (per the `/workbook-onboarding`
-skill's `SHEET-CONTRACTS.md`); the block itself uses orange text and a rail:
+skill's `SKILL.md`, Sheet conventions); the block itself uses orange text and a rail:
 
 - Col A: `HANDOFF YYYY-MM-DD HH:MM` — bold 10pt in alert orange **#EA580C** (canonical palette in
-  the `/workbook-onboarding` skill's `SHEET-CONTRACTS.md` — keep this value in sync)
+  the `/workbook-onboarding` skill's `SKILL.md`, Sheet conventions)
 - Col B: `Originated in chat ending [date]` — normal 10pt, subtitle gray **#6B7280**
 - Metadata row vertically centered.
 
@@ -54,4 +54,4 @@ extend without checking."
 
 If a Handoff sheet already exists when `/workbook-handoff` runs (a prior task never closed), clear
 content from row 3 onward (preserve title rows 1–2) and write the new block. Detection and
-lifecycle are defined in the `/workbook-onboarding` skill's `SHEET-CONTRACTS.md`.
+lifecycle are defined in the `/workbook-onboarding` skill's `SKILL.md`, Sheet conventions.

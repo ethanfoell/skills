@@ -1,0 +1,5 @@
+interface:
+  display_name: "Rewrite Skill"
+  short_description: "Rewrite one skill under writing-for-agents"
+policy:
+  allow_implicit_invocation: false

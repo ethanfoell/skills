@@ -72,7 +72,7 @@ Examples:
 
 Keep each line tight. Composite sub-actions (create a parent dir, then move into it) condense into the parent Step's line.
 
-**Speak the folder's vocabulary.** If the folder has a `CONTEXT.md`, use its canonical terms in per-step reports and the Surfaced list (not the `_Avoid_` synonyms). If execution coins or sharpens a term, **queue it for `/folder-log`** to record via `/domain-modeling` — don't write the glossary mid-build.
+**Speak the folder's vocabulary.** If the folder has a `GLOSSARY.md`, use its canonical terms in per-step reports and the Surfaced list (not the `_Avoid_` synonyms). If execution coins or sharpens a term, **queue it for `/folder-log`** to record via `/domain-modeling` — don't write the glossary mid-build.
 
 **A step's deliverable is a workbook:** compose `/excel-finance-workbooks` (and `/velixo-formulas` when Velixo functions are in play) if the plan didn't already load them. The record obligation attaches to the artifact, not the invoking loop: creating or materially editing a **durable workbook** (the plan names the kind) includes its four-sheet scaffolding and an Audit Log entry for what changed inside it, as part of the step — the folder's history layer records the task at folder grain; the workbook's own Audit Log records the in-file story. A **disposable** workbook gets no scaffolding — its generating script and the folder record are its record. If the plan didn't name the kind, apply the test (will a future session open it to work on it?) and note the call for `/folder-log` Deviations.
 
@@ -200,7 +200,7 @@ Both are visible in chat and captured in `/folder-log` Deviations. More than two
 - [ ] Every destructive op was explicitly confirmed; archive-by-move preferred over delete
 - [ ] Out-of-scope discoveries went to Surfaced, not silently done
 - [ ] A durable workbook created or materially edited got its four-sheet scaffolding and an Audit Log entry for the in-file changes; a disposable one got none
-- [ ] Per-step reports and Surfaced list use the folder's `CONTEXT.md` canonical terms; any coined term queued for `/folder-log`, not authored mid-build
+- [ ] Per-step reports and Surfaced list use the folder's `GLOSSARY.md` canonical terms; any coined term queued for `/folder-log`, not authored mid-build
 - [ ] Deviations noted clearly enough for `/folder-log` to capture
 - [ ] Files-touched list is complete
 - [ ] Final summary leads with `Status: [Complete | Partial]` and matches the structure `/folder-log` reads against
