@@ -7,7 +7,7 @@ Genuinely cross-domain workflow tools: not finance-specific, not code-specific.
 Reachable only when you type them (`disable-model-invocation: true`).
 
 - **[chat-title](./chat-title/SKILL.md)**: Propose a short, scannable title for the current chat, naming the high-level work it did rather than the repo or date the app already groups by.
-- **[daily-note](./daily-note/SKILL.md)**: Summarize the current session as a manager-facing daily note: one dense mention per front of work, plus a More detail cut only when it earns it.
+- **[daily-note](./daily-note/SKILL.md)**: Summarize the current session as a manager-facing daily note: one plain line per front of work, ready to paste into one Excel cell, plus a More detail block.
 - **[grill-me](./grill-me/SKILL.md)**: Get relentlessly interviewed about a plan or design until every branch of the design tree is resolved.
 - **[grill-with-docs](./grill-with-docs/SKILL.md)**: Grilling session that also builds your project's domain model, sharpening terminology and updating `GLOSSARY.md` and ADRs inline.
 - **[handoff](./handoff/SKILL.md)**: Compact the current conversation into a handoff document so another agent can continue the work.

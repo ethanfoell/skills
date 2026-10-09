@@ -2,6 +2,27 @@
 
 The public changelog. Version numbers continue the private authoring repo's release line, which reached 0.24.2 before the first public cut; this file starts there rather than reconstructing the pre-public history. Each public release lands as one export snapshot, and the private releases it rolls up are summarized under their own numbers here.
 
+## 0.36.0
+
+`daily-note` is rewritten for long sessions and for pasting into a spreadsheet.
+
+- The write-up goes to a fresh subagent that reads the session's stored transcript, so a long chat that has been compacted still gets every piece of its work into the note. In T3 Code the subagent runs on Opus 5.5 or GPT-6.1-Sol at high effort, matching the chat's provider; elsewhere it uses the surface's own subagent tool. With no subagent, a failed one, or a transcript from the wrong session, the main agent writes the note itself, from its stored transcript when it can reach one.
+- The output is plain text built to paste into one Excel cell: the dated header as an ordinary chat line, then the note with one line per piece of work, then a `More detail:` block of `Label: sentence` lines, now on every note rather than only when it earns its place.
+- The voice reports what the work produced rather than claiming it was checked. Words like "confirmed" and "tied out" are kept for checks the user made, and the note leaves the worker unnamed: the user appears only as "I", for what they still have to do, and other people by name or role.
+
+## 0.35.0
+
+`video-research` proves a fresh transcript before reading it, and ships the tools that do it.
+
+- `scripts/transcript.py check` flags loops, heavily repeated lines, and stretches where the audio carries speech but the transcript has almost no words, and refuses audio shorter than the transcript. `scripts/transcript.py reading-copy` splices re-transcribed clips in by offset and writes the timed reading copy. `scripts/flatten_chat.py` turns a YouTube chat replay into Markdown.
+- Transcription runs whisper.cpp with `-mc 0`, which cleared both the looping and the blank-through-speech failures in tests. `MEDIA.md` records why `--vad` and `--prompt` are left out. Livestream polling and chat replay move to a new `LIVESTREAM.md`.
+- Download guidance from the first livestream run covers downloading a finished stream at `post_live`, the fragment 401 error and its fix, size and caption caveats, why to skip `--write-info-json`, checking yt-dlp's own exit status in background chains, format pairs that fetch audio twice, and updating yt-dlp before a run.
+- The skill adds a digest scope, a dated log that doubles as the provenance note, and an option to have subagents read ranges of a very long recording; a corrected reading copy lists its substitutions in its header.
+
+## 0.34.1
+
+`video-research` gains the livestream chat replay as an optional fourth channel: when to fetch it, how to check which chat the speaker reads, and how to pair a paid question with its spoken answer.
+
 ## 0.34.0
 
 Upstream sync with Matt Pocock's skills repo (his v1.3.1), in four parts, plus an attribution cleanup.

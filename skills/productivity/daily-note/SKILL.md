@@ -1,70 +1,70 @@
 ---
 name: daily-note
-description: "Summarize the current session as a manager-facing daily note: one dense mention per front of work, plus a More detail cut only when it earns it."
+description: "Summarize the current session as a manager-facing daily note: one plain line per front of work, ready to paste into one Excel cell, plus a More detail block."
 disable-model-invocation: true
 ---
 
-Write a daily note: a manager-facing summary of what this chat session accomplished, across any kind of work (workbook builds, analysis, research, writing, planning, messaging).
+Write a daily note: a manager-facing summary of what this chat session produced, across any kind of work. The reader is a manager glancing between meetings, so the note passes the **15-second test**: one skim leaves them with what got done, why it mattered, and what they need to know or do.
 
-## The reader
+## Workflow
 
-A manager, or someone above them, glancing between meetings to confirm the work is real and to catch anything they must act on. The note passes the **15-second test**: one skim leaves the reader with what got done, why it mattered, and what they need to know or do.
+1. **Delegate the run.** Compaction drops work from a long chat's context, and dropped work drops out of the note; a fresh subagent reads the session's stored transcript, which compaction leaves whole. The parent locates its own transcript, since the subagent starts from the brief alone: in T3 Code, the thread ID `orchestrator_capabilities` returns as `parentThreadId`, read with `t3_thread_read`; in Claude Code, the `.jsonl` named by `$CLAUDE_CODE_SESSION_ID`; elsewhere, wherever the surface stores the session. Then it starts the subagent on the first route the surface offers:
+   - **T3 Code:** `delegate_task` in `wait` mode, on the parent's provider: Claude gets `claude-opus-5-5` with `effort: high`, Codex gets `gpt-6.1-sol` with `reasoningEffort: high`.
+   - **Elsewhere:** the surface's own subagent tool, starting a fresh agent at high effort on its strongest model family (`opus` in Claude Code's Agent tool); a fresh agent reads the transcript clean, where a fork carries the compacted context.
+
+   The brief carries this file's path with the instruction to follow it from step 2, the transcript's location (in T3 Code, the parent's thread ID), today's date, and "return only the output in Format". The parent prints the returned output as it stands, correcting only a wrong date. With no subagent route, a failed one, or a subagent reporting the wrong session, the parent runs step 2 onward itself, from its stored transcript when it can reach one. Done when the subagent's output is printed or the parent has taken over.
+2. **Inventory the fronts from the transcript.** Read it start to finish and confirm it holds this `/daily-note` request; a transcript without it belongs to another session, so the subagent returns "wrong session" in place of a note. List each front with its three slots filled. If the chat already holds a daily note, inventory only the work after it. Done when every piece of work in the transcript sits under a front and no front lacks an outcome.
+3. **Write the note.** One line per front, largest outcome first, one to three sentences each: the three slots and nothing more. An empty inventory makes "No new work to log since the last daily note." the whole output, under the header. Done when every front appears exactly once and the note passes the 15-second test.
+4. **Write `More detail:`, every time.** One `Label: sentence` line per topic, carrying what a front's line can't: the reasoning behind a structural decision, the figures a decision rests on, the context an open item needs. Done when every front has at least one detail line, and every reasoning, figure, and open item its note line leaves out sits on one.
 
 ## Fronts
 
 A **front** is a piece of work the manager would name separately, and its test is that it has its own outcome. A two-hour drafting session on one email is one front. Ten iterations of one analysis are one front. A build with twelve components is one front. Each front carries three slots:
 
 - **Task**, in plain terms, leading with the verb ("Audited the Sub Mapping sheet"). Add the problem it addressed when the task alone doesn't show why it mattered.
-- **Outcome**, concrete: a metric, a delta, a decision, a recommendation sent, a deliverable produced, the final answer.
+- **Outcome**, concrete: what the work produced (a deliverable, a draft, a recommendation sent, a decision taken).
 - **Follow-up**, only when the manager needs it: a meeting set, a reply awaited, a blocker, an item they must act on.
 
-Everything else in the chat is **process** and stays in the chat: cell addresses and formula identifiers, tie-outs and intermediate numbers, wording trials, tool mechanics, clarifications between the user and the agent, approaches abandoned without lasting effect.
+Everything else in the chat is **process** and stays in the chat: cell addresses and formula identifiers; tie-outs and intermediate numbers; wording trials; tool mechanics; clarifications between the user and the agent; approaches abandoned without lasting effect; how agents were run (handoffs, prompts, which agent, how many); review rounds, reviewer counts, and test pass counts; internal references (section numbers, issue IDs, PO and receipt numbers, file names besides the deliverable); and non-events, unless the manager needs the reassurance ("approved values unchanged").
 
-## Workflow
+## Voice
 
-1. **Inventory the fronts.** Read every message and list each front with its three slots filled. If the chat already holds a daily note, inventory only the work after it, for a standalone note. Done when every piece of work in the chat sits under a front and no front lacks an outcome.
-2. **Write the note, dense.** One mention per front, largest outcome first, and a mention is its three slots and nothing more. The slots decide the length: a one-front day may be a single sentence, a three-front day names all three. An empty inventory writes "No new work to log since the last daily note" under the header. Done when every front from the inventory appears exactly once and the note passes the 15-second test.
-3. **Decide `More detail:` yourself, from the bar below.** When it clears, add the block; when it doesn't, the note alone is the daily note.
+The note goes out in the user's voice, as a competent colleague's brief status update: plain and matter-of-fact. Sentences lead with the verb and carry no subject, so the note speaks about the work and leaves the worker unnamed. The user appears only as "I", for what they personally still have to do ("I review the carrier lanes before posting"); other people appear by name or role (the manager, AP, a vendor). An agent appears only as "an agent" or "AI agent", and only when an agent is part of the outcome.
 
-## The More detail: bar
+The work stays the agent's until the user reviews it, so the note reports what the work **produced**. Produced-words carry it: built, drafted, proposed, flagged, mapped, staged. Checked-words (confirmed, verified, tied out, fixed, resolved, corrected, clean) are reserved for a check the user made in the chat. A figure earns its place as the deliverable or as the number a decision rests on, and reads as the work's figure ("the draft lowers the accrual by about $18,400").
 
-`More detail:` carries a front's *why* and *how much* when its three slots can't: the reasoning behind a structural decision, the itemized numbers, the context an open item needs. It clears the bar when at least one holds:
-
-- A structural decision affects future work and its reasoning isn't self-evident from the outcome.
-- Quantitative outcomes are worth itemizing (totals, deltas, coverage, dollar amounts, a per-component breakdown).
-- An open item needs context before the manager can act (one sentence each).
-- Two or more fronts each have an outcome worth expanding past their mention.
-
-When none holds, the block and its label are absent.
-
-## Register
-
-A competent colleague giving a brief status update: confident, plain, matter-of-fact. Value shows through the task and the outcome, so the note states both and stops. Proper nouns (workbooks, sheets, tools, people, vendors) orient the reader; meaningful numbers (totals, deltas, percentages, dollar amounts) tell the story. Punctuate with commas, periods, parentheses, colons, and semicolons; the note carries no em dashes, since the user doesn't write with them.
+Proper nouns (workbooks, sheets, tools, people, vendors) orient the reader. Punctuate with commas, periods, parentheses, colons, and semicolons; the note carries no em dashes, since the user doesn't write with them.
 
 ## Format
 
-- Header: `**Daily Note 5.11.2026**`, today's date as M.D.YYYY.
-- The note directly under the header, unlabeled, flowing prose without bullets: one paragraph, or one short paragraph per front on a multi-front day.
-- `More detail:` after a blank line, opened by the bold label **`More detail:`**, in the same voice; a tight bullet list only for list-shaped content (open items, a run of itemized numbers).
+The user pastes the note, and often `More detail:` beneath it, into one Excel cell under their own line for the time block, so both blocks are plain text that pastes clean:
+
+1. `**Daily Note 5.11.2026**`, today's date as M.D.YYYY, as an ordinary chat line outside the blocks.
+2. The note in a fenced `text` block: plain sentences, one line per front, the lines back to back.
+3. `More detail:` in a second fenced `text` block of the same plain, back-to-back lines: first `More detail:`, then the `Label: sentence` lines.
 
 ## Examples
 
-**One front, a drafting session.** The chat is full of register experiments and wording trials; the front's slots are the task and recipient, the point the message made, and the send status.
+**One front, the claim against the product.** The chat rebuilt a freight accrual and ran reviewers over it.
 
-Too long:
-> Drafted and refined a response to Sam's counter-proposal on Ramp approval chains. Worked through several iterations to find the right register, firm on the existing structure but open to a meeting. The final version acknowledged his cost-asymmetry point specifically, named the precedent risk if customizations stack per department, and framed the meeting as a pressure test of his proposal rather than open-ended deliberation. The message has been sent.
+Overstated:
+> Rebuilt the Q3 freight accrual and confirmed it ties out cleanly to the carrier statements; three independent reviewers recomputed all 212 lanes and found zero errors. Corrected the regional carrier's $18,400 overbilling. Everything is committed and clean.
 
-Right length:
-> Responded to Sam's counter-proposal on the Ramp approval chain restructure. Held the line on the existing principle (vendor owners must report to a C-suite exec) while accepting a meeting to walk through both approaches. Sent.
+Plain:
+> Rebuilt the Q3 freight accrual in the Freight Accruals workbook from the carrier statements; the draft lowers the accrual by about $18,400, mostly a billing difference with the regional carrier. Next: I review those lanes before the accrual posts.
 
-**Two fronts, `More detail:` clears the bar:**
-> **Daily Note 5.12.2026**
->
-> Aligned the CFO P&L on Budget vs Actuals v15 against the CFO's original blueprint and built a formal P&L Comparison sheet to present for structural buy-in. Three structural questions and the Acumatica payroll permissions blocker remain open for the CFO conversation.
->
-> **More detail:** The comparison ran all 148 of my line items against his 139 side-by-side (90 identical, 44 modified, 14 only in mine, 5 only in his). Executed five fixes with clear CFO precedent, the biggest moving $1.4M YTD from a misclassified Amortization line to Interest Expense. Open for the CFO: the Returns-reserve breakout, the Fulfillment/Logistics sub overlap, and Software-subscriptions placement; the payroll permissions blocker (~$520K/month across 5 GLs) has a Teams message drafted but not sent.
+**Two fronts, the full output:**
 
-**Light session, `More detail:` absent:**
-> **Daily Note 5.6.2026**
->
-> Pulled Q1 2026 revenue from Amazon Seller Central for the 4/22 to 5/6 settlement period and tied the $48,500 deposit to the bank statement cleanly. Also fixed a stale Dashboard lookup pointing at a deleted column.
+**Daily Note 5.12.2026**
+
+```text
+Drafted the FY27 headcount plan in the Staffing Plan workbook from the department requests and current open roles, staged for Thursday's budget review.
+Mapped the packaging vendor's three billing entities to one Acumatica vendor record and flagged two duplicate invoices for AP.
+```
+
+```text
+More detail:
+Headcount: the draft adds 14 of the 19 requested roles; the five deferred roles sit on the Deferred tab with each manager's reason.
+Cost: the draft puts the new roles at about $1.6M fully loaded for FY27, with eight hires timed to the back half.
+Duplicates: the two invoices total $7,250; AP decides whether to void or credit them.
+```
