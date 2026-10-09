@@ -1,6 +1,6 @@
 {
   "name": "ethanfoell-skills",
-  "version": "0.34.0",
+  "version": "0.36.0",
   "description": "Engineering discipline for a financial analyst's work: plan before touching anything, validate as you go, log what changed. Structured loops carry Excel workbooks and file folders from first look to finished, audited change, with live Velixo/Acumatica reporting; a planning pipeline grills rough ideas into agent-ready work; and a code-craft arm builds the small finance tools alongside. One method, every surface: web, Excel, Cowork, Claude Code.",
   "author": {
     "name": "Ethan Foell"
